@@ -26,29 +26,29 @@
     $tpvar = \Nos\Nos::main_controller()->getTemplateVariation();
     $menu = $tpvar->menus->principal;
     if (!empty($menu)) {
-    $items = $menu->branch();
-    if (count($items)) {
-    ?>
-    <article>
-        <?php
-        foreach ($items as $item) {
-            echo '<section><div class="bullet"><h2>', e($item->mitem_title), '</h2>', $item->html(), '</div>';
+        $items = $menu->branch();
+        if (count($items)) {
 
-            $subitems = $menu->branch($item);
-            if (count($subitems)) {
-                foreach ($subitems as $si) {
-                    echo '<div class="bullet">', $si->html(), '</div>';
+            echo '<article>';
+
+            foreach ($items as $item) {
+                echo '<section><div class="bullet"><h2>', e($item->mitem_title), '</h2>', $item->html(), '</div>';
+
+                $subitems = $menu->branch($item);
+                if (count($subitems)) {
+                    foreach ($subitems as $si) {
+                        echo '<div class="bullet">', $si->html(), '</div>';
+                    }
                 }
+
+                echo '</section>';
             }
-
-            echo '</section>';
+            echo '</article>';
         }
-        echo '</article>';
-        }
-        }
+    }
 
 
-        ?>
+    ?>
 
 </div>
 
